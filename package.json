@@ -9,6 +9,8 @@
     "type": "git",
     "url": "https://github.com/vit-svoboda/vue-kontent-rich-text"
   },
+  "main": "dist/vue-kontent-rich-text.umd.js",
+  "unpkg": "dist/vue-kontent-rich-text.umd.min.js",
   "files": [
     "dist"
   ],
