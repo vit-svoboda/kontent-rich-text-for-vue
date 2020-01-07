@@ -1,6 +1,6 @@
 {
   "name": "vue-kontent-rich-text",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A component for rendering Kentico Kontent rich text elements in vue.js",
   "license": "MIT",
   "author": "Vít Svoboda <vit.svoboda@gmail.com>",
@@ -10,19 +10,22 @@
     "url": "https://github.com/vit-svoboda/vue-kontent-rich-text"
   },
   "main": "dist/vue-kontent-rich-text.umd.js",
-  "unpkg": "dist/vue-kontent-rich-text.umd.min.js",
+  "module": "dist/vue-kontent-rich-text.es.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve src/index.js",
-    "build": "vue-cli-service build --target lib src/index.js"
+    "build": "npm run build:umd & npm run build:es",
+    "build:umd": "rollup -c --format umd --file dist/vue-kontent-rich-text.umd.js",
+    "build:es": "rollup -c --format es --file dist/vue-kontent-rich-text.es.js"
   },
   "dependencies": {
     "jsdom": "^15.2.1"
   },
   "devDependencies": {
-    "@vue/cli-service": "^4.1.2",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "rollup": "^1.28.0",
+    "rollup-plugin-vue": "^5.1.1",
     "vue-template-compiler": "^2.6.11"
   }
 }
