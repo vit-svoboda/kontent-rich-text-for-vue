@@ -28,11 +28,16 @@ Let's say we have content in items of content type _blog_post_ where there are 2
 * _content_ is a rich text and needs a bit more love
 
 ```vue
-<template lang="pug">
-  h1 {{blogPost.title.value}}
-  div
-    rich-text(:content='blogPost.content.value' :linkedItemComponent='linkedItemComponent')
+<template>
+  <h1>{{blogPost.title.value}}</h1>
+  <div>
+    <rich-text
+      :content='blogPost.content.value'
+      :linkedItemComponent='linkedItemComponent'
+    />
+  </div>
 </template>
+
 <script>
   import { RichText } from 'vue-kontent-rich-text';
   import LinkedItem from './components/linked-item.vue';
@@ -85,11 +90,16 @@ The rich-text component passes to the linked items one prop and that is the `ite
 In the case of our YouTube video, it contains a video ID and a short description.
 
 ```vue
-<template lang="pug">
-  figure
-    iframe(:src='`https://youtube.com/embed/${item.id.value}?rel=0`')
-    figcaption {{item.description.value}}
+<template>
+  <figure>
+    <iframe
+      :src='`https://youtube.com/embed/${item.videoId.value}?rel=0`'
+    >    
+    </iframe>
+    <figcaption>{{item.description.value}}</figcaption>
+  </figure>
 </template>
+
 <script>
   export default {
     props: ['item']
@@ -98,15 +108,20 @@ In the case of our YouTube video, it contains a video ID and a short description
 ```
 
 ## Rich text in a rich text
-Another content type used as a component or linked item in our example also contains a rich text element.
+Another content type used as a component or linked item in our example also contains a rich text element `quote`.
 We'll wrap the value in the same `rich-text` component we used on the parent page.
 And in case this text contains nested linked items, we'll also pass the linked-item component.
 
 ```vue
-<template lang="pug">
-  blockquote
-    rich-text(:content='item.pull_quote.value' :linkedItemComponent='linkedItemComponent')
+<template>
+  <blockquote>
+    <rich-text
+      :content='item.quote.value'
+      :linkedItemComponent='linkedItemComponent'
+    />
+  </blockquote>
 </template>
+
 <script>
   import { RichText } from 'vue-kontent-rich-text';
   import LinkedItem from './linked-item.vue';
