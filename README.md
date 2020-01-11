@@ -1,5 +1,5 @@
 # Render rich text from Kentico Kontent in Vue
-This package replaces `resolveHtml` method provided by the [Kontent Delivery SDK](https://github.com/Kentico/kontent-delivery-sdk-js/blob/master/DOCS.md#resolving-content-items-and-components-in-rich-text-elements) to display value of rich text elements.
+This package replaces the `resolveHtml` method provided by the [Kontent Delivery SDK](https://github.com/Kentico/kontent-delivery-sdk-js/blob/master/DOCS.md#resolving-content-items-and-components-in-rich-text-elements) to display value of rich text elements.
 
 [Kentico Kontent](https://kontent.ai) allows you to write content in [rich text elements](https://docs.kontent.ai/tutorials/write-and-collaborate/write-content/composing-content-in-the-rich-text-editor),
 where you can do all sorts of formatting.
