@@ -23,23 +23,24 @@ npm install vue-kontent-rich-text --save
 
 ## Basic usage
 This package contains a component that accepts the raw rich text value from Kentico Kontent delivery API and your component that will replace each linked item or component found in the text.
-Let's say we have content in items of content type _project_ where there are 2 elements:
+Let's say we have content in items of content type _blog_post_ where there are 2 elements:
 * _title_ is a regular text that can be rendered as-is
 * _content_ is a rich text and needs a bit more love
 
 ```vue
 <template lang="pug">
-  h1 {{project.title.value}}
+  h1 {{blogPost.title.value}}
   div
-    rich-text(:content='project.content.value' :linkedItemComponent='linkedItemComponent')
+    rich-text(:content='blogPost.content.value' :linkedItemComponent='linkedItemComponent')
 </template>
 <script>
   import { RichText } from 'vue-kontent-rich-text';
   import LinkedItem from './components/linked-item.vue';
+
   export default {
     components: { RichText },
     computed: {
-      project: () => project, // Pick it up from a vuex store or wherever you happen to keep it
+      blogPost: () => blogPost, // Pick it up from a vuex store or wherever you happen to keep it
       linkedItemComponent: () => LinkedItem
     }
   }
@@ -68,9 +69,9 @@ To make pairing of linked item components with linked item data easier, one more
       const {props} = context;
 
       const selectLinkedItemData = (itemCodeName) => {
-        // Again, pick the project from a vuex store or wherever.
-        // I ended up having page 'provide' the project  and then injected it here.
-        return project.linked_items[itemCodeName]; 
+        // Again, pick the blogPost from a vuex store or wherever.
+        // I ended up having page 'provide' the blogPost  and then injected it here.
+        return blogPost.linkedItems[itemCodeName]; 
       };      
 
       const component = linkedItemFactory(selectComponent, selectLinkedItemData);
