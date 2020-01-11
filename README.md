@@ -1,7 +1,7 @@
-# Renderer for Rich Text from Kentico Kontent for Vue
-This package replaces the linked item resolution provided by the [Kontent Delivery SDK](https://github.com/Kentico/kontent-delivery-sdk-js/blob/master/DOCS.md#resolving-content-items-and-components-in-rich-text-elements).
+# Render rich text from Kentico Kontent in Vue
+This package replaces `resolveHtml` method provided by the [Kontent Delivery SDK](https://github.com/Kentico/kontent-delivery-sdk-js/blob/master/DOCS.md#resolving-content-items-and-components-in-rich-text-elements) to display value of rich text elements.
 
-[Kentico Kontent](https://kontent.ai) allows you to write content in [rich text](https://docs.kontent.ai/tutorials/write-and-collaborate/write-content/composing-content-in-the-rich-text-editor) elements,
+[Kentico Kontent](https://kontent.ai) allows you to write content in [rich text elements](https://docs.kontent.ai/tutorials/write-and-collaborate/write-content/composing-content-in-the-rich-text-editor),
 where you can do all sorts of formatting.
 What's more interesting, you can also compose your content from inline or reusable bits of content, referred to as [components and linked items](https://docs.kontent.ai/tutorials/write-and-collaborate/structure-your-content/structuring-editorial-articles-with-components) respectively.
 
@@ -23,6 +23,7 @@ npm install vue-kontent-rich-text --save
 
 ## Basic usage
 This package contains a component that accepts the raw rich text value from Kentico Kontent delivery API and your component that will replace each linked item or component found in the text.
+
 Let's say we have content in items of content type _blog_post_ where there are 2 elements:
 * _title_ is a regular text that can be rendered as-is
 * _content_ is a rich text and needs a bit more love
@@ -30,7 +31,7 @@ Let's say we have content in items of content type _blog_post_ where there are 2
 ```vue
 <template>
   <h1>{{blogPost.title.value}}</h1>
-  <div>
+  <div> <!-- here you would normally put attribute v-html='blogPost.content.resolveHtml()' but no more -->
     <rich-text
       :content='blogPost.content.value'
       :linkedItemComponent='linkedItemComponent'
@@ -52,6 +53,7 @@ Let's say we have content in items of content type _blog_post_ where there are 2
 </script>
 ```
 Now, my `linked-item` component will need to decide how various linked items and components appearing in the text should look like.
+
 To make pairing of linked item components with linked item data easier, one more thing is exported from this package.
 ```vue
 <script>
@@ -140,5 +142,6 @@ but as the components grew to render more and more of markup, messing with strin
 
 ## Feedback & Contributions
 The provided component is quite bare-bones, but does everything I need. I'm interested if your use case differs and thus my implementation lacks.
+
 Furthermore, I'm no Vue expert, so I'd love to hear if there are nicer or more elegant ways of doing things.
 

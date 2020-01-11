@@ -9,6 +9,15 @@
     "type": "git",
     "url": "https://github.com/vit-svoboda/vue-kontent-rich-text"
   },
+  "keywords": [
+    "vue",
+    "Kentico",
+    "Kentico Kontent",
+    "kentico-kontent",
+    "component",
+    "vue-component",
+    "vue-kontent-rich-text"
+  ],
   "main": "dist/vue-kontent-rich-text.umd.js",
   "module": "dist/vue-kontent-rich-text.es.js",
   "files": [
