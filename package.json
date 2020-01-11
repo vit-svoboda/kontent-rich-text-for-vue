@@ -1,5 +1,5 @@
 {
-  "name": "vue-kontent-rich-text",
+  "name": "kontent-rich-text-for-vue",
   "version": "0.0.2",
   "description": "A component for rendering Kentico Kontent rich text elements in vue.js",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/vit-svoboda/vue-kontent-rich-text"
+    "url": "https://github.com/vit-svoboda/kontent-rich-text-for-vue"
   },
   "keywords": [
     "vue",
@@ -16,17 +16,17 @@
     "kentico-kontent",
     "component",
     "vue-component",
-    "vue-kontent-rich-text"
+    "kontent-rich-text-for-vue"
   ],
-  "main": "dist/vue-kontent-rich-text.umd.js",
-  "module": "dist/vue-kontent-rich-text.es.js",
+  "main": "dist/kontent-rich-text-for-vue.umd.js",
+  "module": "dist/kontent-rich-text-for-vue.es.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "npm run build:umd & npm run build:es",
-    "build:umd": "rollup -c --format umd --file dist/vue-kontent-rich-text.umd.js",
-    "build:es": "rollup -c --format es --file dist/vue-kontent-rich-text.es.js"
+    "build:umd": "rollup -c --format umd --file dist/kontent-rich-text-for-vue.umd.js",
+    "build:es": "rollup -c --format es --file dist/kontent-rich-text-for-vue.es.js"
   },
   "dependencies": {
     "jsdom": "^15.2.1"

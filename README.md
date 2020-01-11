@@ -18,7 +18,7 @@ That happened to be Vue.js at the moment. So I wrote this tiny component that ma
 ## Installation
 Pick the package up form npm:
 ```
-npm install vue-kontent-rich-text --save
+npm install kontent-rich-text-for-vue --save
 ```
 
 ## Basic usage
@@ -40,7 +40,7 @@ Let's say we have content in items of content type _blog_post_ where there are 2
 </template>
 
 <script>
-  import { RichText } from 'vue-kontent-rich-text';
+  import { RichText } from 'kontent-rich-text-for-vue';
   import LinkedItem from './components/linked-item.vue';
 
   export default {
@@ -57,7 +57,7 @@ Now, my `linked-item` component will need to decide how various linked items and
 To make pairing of linked item components with linked item data easier, one more thing is exported from this package.
 ```vue
 <script>
-  import { linkedItemFactory } from 'vue-kontent-rich-text';
+  import { linkedItemFactory } from 'kontent-rich-text-for-vue';
   import YoutubeVideo from './youtube-video.vue';
   import Quote from './quote.vue';
   
@@ -125,7 +125,7 @@ And in case this text contains nested linked items, we'll also pass the linked-i
 </template>
 
 <script>
-  import { RichText } from 'vue-kontent-rich-text';
+  import { RichText } from 'kontent-rich-text-for-vue';
   import LinkedItem from './linked-item.vue';
 
   export default {
