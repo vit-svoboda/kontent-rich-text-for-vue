@@ -26,13 +26,17 @@
   "scripts": {
     "build": "npm run build:umd & npm run build:es",
     "build:umd": "rollup -c --format umd --file dist/kontent-rich-text-for-vue.umd.js",
-    "build:es": "rollup -c --format es --file dist/kontent-rich-text-for-vue.es.js"
+    "build:es": "rollup -c --format es --file dist/kontent-rich-text-for-vue.es.js",
+    "test": "jest"
   },
   "dependencies": {
     "jsdom": "^15.2.1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "@types/jest": "^24.9.0",
+    "jest": "^24.9.0",
     "rollup": "^1.28.0",
     "rollup-plugin-vue": "^5.1.1",
     "vue-template-compiler": "^2.6.11"
