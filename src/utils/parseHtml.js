@@ -1,54 +1,61 @@
-import {Parser} from 'htmlparser2';
+// htmlparser2 has stupid exports and thus can't be imported normally
+const htmlparser2 = require('htmlparser2');
 
-class JsonHandler {
-  constructor() {
-    this.blocks = [];
-    this.tagStack = [];
-  }
+const createJsonHandler = () => {
+  const blocks = [];
+  const tagStack = [];
 
-  onerror(error) {
+  const addNode = (node) => {
+    const parent = tagStack[tagStack.length - 1];
+
+    const siblings = parent ? parent.children : blocks;
+    siblings.push(node);
+  };
+
+  const onerror = (error) => {
     throw error;
-  }
+  };
 
-  onclosetag() {
-    this.tagStack.pop();
-  }
+  const onclosetag = () => {
+    tagStack.pop();
+  };
 
-  onopentag(name, attributes) {
+  const onopentag = (name, attributes) => {
     const element = {
       type: name.toUpperCase(),
       data: attributes,
       children: []
     };
-    this.addNode(element);
-    this.tagStack.push(element);
-  }
+    addNode(element);
+    tagStack.push(element);
+  };
 
-  ontext(data) {
+  const ontext = (data) => {
     const node = {
       type: '#text',
       value: data,
       children: [],
     };
 
-    this.addNode(node);
-  }
+    addNode(node);
+  };
 
-  addNode(node) {
-    const parent = this.tagStack[this.tagStack.length - 1];
-
-    const siblings = parent ? parent.children : this.blocks;
-    siblings.push(node);
+  return {
+    onerror,
+    onopentag,
+    onclosetag,
+    ontext,
+    getResult: () => blocks,
   }
-}
+};
 
 export const parseHtml = (htmlString) => {
-  const handler = new JsonHandler();
-  const parser = new Parser(handler);
+  const handler = createJsonHandler();
+  const parser = new htmlparser2.Parser(handler);
 
   parser.write(htmlString);
   parser.end();
 
-  return handler.blocks;
+  return handler.getResult();
 };
 
