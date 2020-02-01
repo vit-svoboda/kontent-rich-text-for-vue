@@ -30,7 +30,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "htmlparser2": "^4.0.0"
+    "parse5": "^5.1.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",

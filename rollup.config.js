@@ -13,5 +13,5 @@ export default {
     }),
     vue(),
   ],
-  external: ['jsdom']
+  external: ['parse5']
 }

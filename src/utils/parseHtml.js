@@ -1,61 +1,30 @@
-// htmlparser2 has stupid exports and thus can't be imported normally
-const htmlparser2 = require('htmlparser2');
+import { parseFragment } from 'parse5';
 
-const createJsonHandler = () => {
-  const blocks = [];
-  const tagStack = [];
-
-  const addNode = (node) => {
-    const parent = tagStack[tagStack.length - 1];
-
-    const siblings = parent ? parent.children : blocks;
-    siblings.push(node);
-  };
-
-  const onerror = (error) => {
-    throw error;
-  };
-
-  const onclosetag = () => {
-    tagStack.pop();
-  };
-
-  const onopentag = (name, attributes) => {
-    const element = {
-      type: name.toUpperCase(),
-      data: attributes,
-      children: []
-    };
-    addNode(element);
-    tagStack.push(element);
-  };
-
-  const ontext = (data) => {
-    const node = {
-      type: '#text',
-      value: data,
-      children: [],
-    };
-
-    addNode(node);
-  };
-
-  return {
-    onerror,
-    onopentag,
-    onclosetag,
-    ontext,
-    getResult: () => blocks,
+const parseAttributes = (node) => {
+  if (node.attrs) {
+    return [...node.attrs].reduce((attributes, property) => {
+      attributes[property.name] = property.value;
+      return attributes;
+    }, {});
   }
 };
 
+const parseChildren = (parent) =>
+  parent.childNodes
+    ? [...parent.childNodes].reduce((blocks, node) => {
+      blocks.push({
+        type: node.nodeName === '#text' ? node.nodeName : node.nodeName.toUpperCase(), // Let's not make a breaking change here
+        value: node.value,
+        children: parseChildren(node),
+        data: parseAttributes(node),
+      });
+      return blocks;
+    }, [])
+    : [];
+
 export const parseHtml = (htmlString) => {
-  const handler = createJsonHandler();
-  const parser = new htmlparser2.Parser(handler);
+  const documentFragment = parseFragment(htmlString);
 
-  parser.write(htmlString);
-  parser.end();
-
-  return handler.getResult();
+  return parseChildren(documentFragment);
 };
 
