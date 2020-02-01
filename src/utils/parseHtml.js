@@ -1,8 +1,8 @@
-import {JSDOM} from 'jsdom';
+import { parseFragment } from 'parse5';
 
 const parseAttributes = (node) => {
-  if (node.attributes) {
-    return [...node.attributes].reduce((attributes, property) => {
+  if (node.attrs) {
+    return [...node.attrs].reduce((attributes, property) => {
       attributes[property.name] = property.value;
       return attributes;
     }, {});
@@ -10,21 +10,21 @@ const parseAttributes = (node) => {
 };
 
 const parseChildren = (parent) =>
-  [...parent.childNodes].reduce((blocks, node) => {
-    blocks.push({
-      type: node.nodeName,
-      value: node.nodeValue || undefined,
-      children: parseChildren(node),
-      data: parseAttributes(node),
-    });
-    return blocks;
-  }, []);
+  parent.childNodes
+    ? [...parent.childNodes].reduce((blocks, node) => {
+      blocks.push({
+        type: node.nodeName === '#text' ? node.nodeName : node.nodeName.toUpperCase(), // Let's not make a breaking change here
+        value: node.value,
+        children: parseChildren(node),
+        data: parseAttributes(node),
+      });
+      return blocks;
+    }, [])
+    : [];
 
 export const parseHtml = (htmlString) => {
-  const dom = new JSDOM(htmlString);
-  const {document} = dom.window;
-  const content = document.querySelector('body');
+  const documentFragment = parseFragment(htmlString);
 
-  return parseChildren(content);
+  return parseChildren(documentFragment);
 };
 
