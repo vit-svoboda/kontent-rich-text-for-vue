@@ -35,8 +35,8 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "@types/jest": "^24.9.0",
-    "jest": "^24.9.0",
+    "@types/jest": "^25.1.5",
+    "jest": "^25.2.6",
     "rollup": "^1.28.0",
     "rollup-plugin-vue": "^5.1.1",
     "vue-template-compiler": "^2.6.11"
