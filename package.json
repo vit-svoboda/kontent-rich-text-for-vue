@@ -33,12 +33,12 @@
     "parse5": "^5.1.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "@types/jest": "^26.0.5",
-    "jest": "^26.1.0",
-    "rollup": "^2.22.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@types/jest": "^26.0.15",
+    "jest": "^26.6.0",
+    "rollup": "^2.32.0",
     "rollup-plugin-vue": "^5.1.9",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12"
   }
 }
