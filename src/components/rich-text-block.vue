@@ -4,12 +4,12 @@
   export default {
     functional: true,
     name: 'rich-text-block',
-    props: ['block', 'linkedItemComponent', 'blockComponent'],
+    props: ['block', 'linkedItemComponent', 'linkComponent', 'blockComponent'],
     render: (createElement, context) => {
-      const {block, linkedItemComponent, blockComponent} = context.props;
+      const {block, linkedItemComponent, linkComponent, blockComponent} = context.props;
 
-      return createElement(RichTextElement, {props: {block, linkedItemComponent}}, block.children.map(child =>
-        createElement(blockComponent, {props: {block: child, linkedItemComponent, blockComponent}})));
+      return createElement(RichTextElement, {props: {block, linkedItemComponent, linkComponent}}, block.children.map(child =>
+        createElement(blockComponent, {props: {block: child, linkedItemComponent, linkComponent, blockComponent}})));
     }
   }
 </script>
