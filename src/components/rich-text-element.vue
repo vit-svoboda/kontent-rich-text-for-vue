@@ -1,18 +1,15 @@
 <script>
-  const defaultLinkComponent = {
-    name: 'default-link-component',
-    functional: true,
-    props: ['block'],
-    render: (createElement, context) =>
-      createElement('a', {domProps: {...context.props.block.data}}, context.children)
-  };
-
+  import linkFactory from "./linkFactory";
   export default {
     name: 'rich-text-element',
     functional: true,
     props: ['block', 'linkedItemComponent', 'linkComponent'],
     render: (createElement, context) => {
-      const {block, linkedItemComponent, linkComponent = defaultLinkComponent } = context.props;
+      const {
+        block,
+        linkedItemComponent,
+        linkComponent = linkFactory({})
+      } = context.props;
 
       switch (block.type) {
         case 'OBJECT':
