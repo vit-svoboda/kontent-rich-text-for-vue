@@ -109,6 +109,54 @@ In the case of our YouTube video, it contains a video ID and a short description
 </script>
 ```
 
+### Links
+Kontent allows you to add [various types of links](https://docs.kontent.ai/tutorials/write-and-collaborate/create-content/compose-content-in-rich-text#a-adding-links) in your rich text.
+Out of these types, the _content item_ link needs its URL resolved to render properly. The link itself contains only ID of the linked content item.
+Usually more data, such as _codename_, _content type_, or _url slug_ of the particular content item is needed for construction of the URL.
+These values can be obtained from the `links` field in the rich text element value.
+
+To make this resolution a bit easier, another factory is exported from this package.
+However, the factory needs to be injected with the url construction logic, and possibly with customized component to be rendered instead of the plain `a` element.
+```vue
+<template>
+  <h1>{{blogPost.title.value}}</h1>
+  <div>
+    <rich-text
+      :content='blogPost.content.value'
+      :linkComponent='linkComponent'
+    />
+  </div>
+</template>
+
+<script>
+  import { RichText, createLink } from 'kontent-rich-text-for-vue';
+  import CustomEmailLink from './components/custom-email-link.vue';
+
+  export default {
+    components: { RichText },
+    computed: {
+      blogPost: () => blogPost, // Pick it up from a vuex store or wherever you happen to keep it
+      linkComponent: () => createLink({
+        getLinkComponent: linkType => {
+          // Can be 'content-item' | 'asset' | 'email' | 'web-url'
+          if (linkType === 'email') {
+            return CustomEmailLink;
+          }          
+          // Otherwise use the default component.
+          return null;
+        },
+        getItemLinkUrl: itemId => {
+          const {codename, urlSlug, type} = blogPost.content.links[itemId];
+          return `https://www.myblog.com/posts/${urlSlug}`;
+        }
+      })
+    }
+  }
+</script>
+```
+The `linkComponent` is an optional prop and is not necessary unless you need content item link's URLs resolved or link rendering customized in any other way.
+
+
 ## Rich text in a rich text
 Another content type used as a component or linked item in our example also contains a rich text element `quote`.
 We'll wrap the value in the same `rich-text` component we used on the parent page.
