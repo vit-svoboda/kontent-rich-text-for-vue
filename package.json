@@ -1,6 +1,6 @@
 {
   "name": "kontent-rich-text-for-vue",
-  "version": "2.0.0-1",
+  "version": "2.0.0-2",
   "description": "A component for rendering Kentico Kontent rich text elements in vue.js",
   "license": "MIT",
   "author": "Vít Svoboda <vit.svoboda@gmail.com>",
