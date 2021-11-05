@@ -146,7 +146,7 @@ However, the factory needs to be injected with the url construction logic, and p
           return null;
         },
         getItemLinkUrl: itemId => {
-          const {codename, urlSlug, type} = blogPost.content.links[itemId];
+          const {codename, urlSlug, type} = blogPost.content.links.find(link => link.linkId === itemId);
           return `https://www.myblog.com/posts/${urlSlug}`;
         }
       })
