@@ -129,14 +129,14 @@ However, the factory needs to be injected with the url construction logic, and p
 </template>
 
 <script>
-  import { RichText, createLink } from 'kontent-rich-text-for-vue';
+  import { RichText, linkFactory } from 'kontent-rich-text-for-vue';
   import CustomEmailLink from './components/custom-email-link.vue';
 
   export default {
     components: { RichText },
     computed: {
       blogPost: () => blogPost, // Pick it up from a vuex store or wherever you happen to keep it
-      linkComponent: () => createLink({
+      linkComponent: () => linkFactory({
         getLinkComponent: linkType => {
           // Can be 'content-item' | 'asset' | 'email' | 'web-url'
           if (linkType === 'email') {
