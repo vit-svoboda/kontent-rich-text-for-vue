@@ -44,7 +44,7 @@
     "rollup": "^2.58.0",
     "rollup-plugin-vue": "^6.0.0",
     "vue": "^2.6.14",
-    "vue-jest": "^3.0.7",
+    "vue-jest": "^4.0.1",
     "vue-template-compiler": "^2.6.14"
   },
   "jest": {
